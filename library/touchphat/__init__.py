@@ -36,7 +36,7 @@ def on_touch(pad, handler=None):
 
     The function should expect one argument: event. You can look at event.pad to determine which pad was hit.
 
-    :param pad: A single integer from 0 to 7, or a list of integers
+    :param pad: A single integer 0 to 5, a pad name (Back, A, B, C, D, Enter), or a list
     :param handler: The handler function to call on hit
     """
     global _on_press
@@ -56,7 +56,7 @@ def on_release(pad, handler=None):
 
     The function should expect one argument: event. You can look at event.pad to determine which pad was released.
 
-    :param pad: A single integer from 0 to 7, or a list of integers
+    :param pad: A single integer from 0 to 5, a pad name (Back, A, B, C, D, Enter), or a list
     :param handler: The handler function to call on release
     """
     global _on_release
@@ -122,48 +122,37 @@ def _handle_release(event):
 def led_on(pad):
     """Turn on an LED corresponding to a single pad.
 
-    :param pad: A single integer from 0 to 5, corresponding to the pad whose LED you want to turn on.
+    :param pad: A single integer from 0 to 5 or a pad name (Back, A, B, C, D, Enter), corresponding to the pad whose LED you want to turn on.
+
     """
-    idx = -1
 
-    try:
-        if type(pad) == str:
-            idx = NAMES.index(pad)
-        else:
-            idx = NUMMAP.index(pad)
-    except ValueError:
-        raise TypeError("Invalid touch pad #{}".format(pad))
-
-    led = LEDMAP[idx]
-    dh.set_led_state(led, True)
+    set_led(pad, True)
 
 def all_off():
     """Turn off all LEDs"""
+
     for pad in PADS:
         led_off(pad)
 
 def all_on():
     """Turn on all LEDs"""
+
     for pad in PADS:
         led_on(pad)
 
 def led_off(pad):
     """Turn off an LED corresponding to a single pad.
 
-    :param pad: A single integer from 0 to 5, corresponding to the pad whose LED you want to turn off.
+    :param pad: A single integer from 0 to 5 or a pad name (Back, A, B, C, D, Enter), corresponding to the pad whose LED you want to turn off.
+
     """
-    idx = -1
 
-    try:
-        if type(pad) == str:
-            idx = NAMES.index(pad)
-        else:
-            idx = NUMMAP.index(pad)
-    except ValueError:
-        raise TypeError("Invalid touch pad #{}".format(pad))
+    set_led(pad, False)
 
+def set_led(pad, value):
+    idx = _pad_to_channel(pad)
     led = LEDMAP[idx]
-    dh.set_led_state(led, False)
+    dh.set_led_state(led, value)
 
 for x in range(6):
     dh.on(x,event='press',   handler=_handle_press)
