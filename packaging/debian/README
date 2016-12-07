@@ -1,0 +1,6 @@
+README
+
+Touch pHAT provides 6 touch inputs and 6 under-mounted LEDs. Ideal for adding physical inputs to your Raspberry Pi project.
+
+Learn more: https://shop.pimoroni.com/products/touch-phat
+For examples run: `curl -sS get.pimoroni.com/touchphat | bash`
