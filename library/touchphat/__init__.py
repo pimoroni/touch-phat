@@ -14,7 +14,7 @@ dh = cap1xxx.Cap1166(i2c_addr=0x2c)
 
 auto_leds = True
 
-PADS = list(range(1,9))
+PADS = list(range(1,7))
 
 NAMES = [
     'Back', 'A', 'B', 'C', 'D', 'Enter'
