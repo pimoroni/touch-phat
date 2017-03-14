@@ -5,10 +5,6 @@ import site
 
 import mock
 
-
-# Prompte /usr/local/lib to the front of sys.path
-#sys.path.insert(0,site.getsitepackages()[0])
-
 import sphinx_rtd_theme
 
 sys.modules['cap1xxx'] = mock.Mock()
