@@ -50,5 +50,5 @@ setup(
     classifiers     = classifiers,
     py_modules      = [],
     packages        = ['touchphat'],
-    install_requires= ['smbus']
+    install_requires= ['cap1xxx']
 )
