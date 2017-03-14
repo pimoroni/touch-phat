@@ -2,7 +2,7 @@
 
 Touch pHAT is a simple add-on for your Pi or Pi Zero that includes 6 touch sensitive pads. Use it to add touch control to your projects.
 
-##Installation
+## Installation
 
 **Full install ( recommended ):**
 
