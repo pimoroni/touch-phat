@@ -32,11 +32,13 @@ def handle_touch(event):
 @touchphat.on_release('A')
 def handle_touch(event):
     os.system("x-terminal-emulator")
+    print("New terminal")
 
 # use of xdg-open to open in preferred browser application
 @touchphat.on_release('B')
 def handle_touch(event):
     os.system("xdg-open 'https://pimoroni.com' &")
+    print("Browser launched")
 
 # check for python version and use subprocess to track pid
 @touchphat.on_release('C')
@@ -47,7 +49,7 @@ def handle_touch(event):
         prog = "idle"
 
     running = subprocess.Popen([prog])
-    print(prog + " pid " + str(running.pid))
+    print(prog.upper() + " launched with pid " + str(running.pid))
 
 # example installing a program if not available on system
 @touchphat.on_release('D')
@@ -61,15 +63,22 @@ def handle_touch(event):
             subprocess.call(["sudo apt-get install pimoroni"], shell=True)
             subprocess.call(["x-terminal-emulator -e pimoroni-dashboard"], shell=True)
             touchphat.led_off('D')
+        print("Dashboard launched")
+
     except:
         print("Something went wrong!")
 
-# shutdown with confirmation dialog via zenity
+# shutdown with confirmation dialog via zenity with whiptail fallback
 @touchphat.on_release('Enter')
 def handle_touch(event):
     try:
-        subprocess.check_call(["zenity --question --text='Are you sure you want to shutdown?' 2> /dev/null"], shell=True)
-        subprocess.check_call(["sudo shutdown +1"], shell=True)
+        zencheck = subprocess.call(["which zenity"], stdout=subprocess.PIPE, shell=True)
+        if zencheck != 1:
+            subprocess.check_call(["zenity --question --text='Are you sure you want to shutdown?' 2> /dev/null"], shell=True)
+            subprocess.check_call(["sudo shutdown +1"], shell=True)
+        else:
+            subprocess.check_call(["whiptail --yesno 'Are you sure you want to shutdown?' 10 50"], shell=True)
+            subprocess.check_call(["sudo shutdown +1"], shell=True)
     except:
         print("Shutdown cancelled")
 
