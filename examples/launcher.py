@@ -16,9 +16,17 @@ B: Browser
 C: Idle
 D: Dashboard 
 
+Back: Logout
+Enter: Shutdown
+
 Press Ctrl+C to exit!
 
 """)
+
+# shortcut to logout, reboot or shutdown using os.system
+@touchphat.on_release('Back')
+def handle_touch(event):
+    os.system("lxsession-logout")
 
 # simple use of os.system to launch a terminal window
 @touchphat.on_release('A')
@@ -55,5 +63,14 @@ def handle_touch(event):
             touchphat.led_off('D')
     except:
         print("Something went wrong!")
+
+# shutdown with confirmation dialog via zenity
+@touchphat.on_release('Enter')
+def handle_touch(event):
+    try:
+        subprocess.check_call(["zenity --question --text='Are you sure you want to shutdown?' 2> /dev/null"], shell=True)
+        subprocess.check_call(["sudo shutdown +1"], shell=True)
+    except:
+        print("Shutdown cancelled")
 
 signal.pause()
