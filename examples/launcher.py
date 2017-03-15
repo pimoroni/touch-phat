@@ -3,11 +3,14 @@
 import os
 import signal
 import subprocess
-from sys import version_info
+from sys import exit, version_info
 
 import touchphat
 
-print("""
+
+try:
+    os.environ['DISPLAY']
+    print("""
 
 Touch pHAT: App Launcher Example
 
@@ -20,8 +23,15 @@ Back: Logout
 Enter: Shutdown
 
 Press Ctrl+C to exit!
-
 """)
+except:
+    print("""
+No X display detected!
+This example requires a full desktop
+... exiting.
+""")
+    exit()
+
 
 # shortcut to logout, reboot or shutdown using os.system
 @touchphat.on_release('Back')
