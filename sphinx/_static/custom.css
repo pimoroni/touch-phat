@@ -25,16 +25,16 @@
 code.literal {
     color:#e63c2e;
 }
-.rst-content #module-drumhat {
+.rst-content #module-touchphat {
     margin-bottom:24px;
 }
-.rst-content #module-drumhat dl:not(.docutils) dt {
+.rst-content #module-touchphat dl:not(.docutils) dt {
     border:none;
     background:#f0f0f0;
 }
-.rst-content #module-drumhat dl:not(.docutils) dd {
+.rst-content #module-touchphat dl:not(.docutils) dd {
     display:none;
 }
-.rst-content #module-drumhat dl:not(.docutils) {
+.rst-content #module-touchphat dl:not(.docutils) {
     margin-bottom:0;
 }
