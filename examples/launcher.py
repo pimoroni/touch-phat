@@ -3,7 +3,6 @@
 import os
 import signal
 import subprocess
-import time
 from sys import version_info
 
 import touchphat
@@ -21,12 +20,12 @@ Press Ctrl+C to exit!
 
 """)
 
-# simple use od os.system to launch program
+# simple use of os.system to launch a terminal window
 @touchphat.on_release('A')
 def handle_touch(event):
     os.system("x-terminal-emulator")
 
-# use of xdg-open to defer url opening to preferred browser application
+# use of xdg-open to open in preferred browser application
 @touchphat.on_release('B')
 def handle_touch(event):
     os.system("xdg-open 'https://pimoroni.com' &")
@@ -42,7 +41,7 @@ def handle_touch(event):
     running = subprocess.Popen([prog])
     print(prog + " pid " + str(running.pid))
 
-# try/except example to install program if not available
+# example installing a program if not available on system
 @touchphat.on_release('D')
 def handle_touch(event):
     try:
