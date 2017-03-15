@@ -24,12 +24,12 @@ Press Ctrl+C to exit!
 # simple use od os.system to launch program
 @touchphat.on_release('A')
 def handle_touch(event):
-    os.system("x-terminal-emulator &")
+    os.system("x-terminal-emulator")
 
 # use of xdg-open to defer url opening to preferred browser application
 @touchphat.on_release('B')
 def handle_touch(event):
-    os.system("xdg-open 'https://pimoroni.com' &")
+    os.system("xdg-open 'https://pimoroni.com'")
 
 # check for python version and use subprocess to track pid
 @touchphat.on_release('C')
