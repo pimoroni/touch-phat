@@ -16,6 +16,20 @@ auto_leds = True
 
 PADS = list(range(1,7))
 
+GAIN_1X = 0b00
+GAIN_2X = 0b01
+GAIN_3X = 0b10
+GAIN_4X = 0b11
+
+SENS_128X = 0b000
+SENS_64X = 0b001
+SENS_32X = 0b010
+SENS_16X = 0b011
+SENS_8X = 0b100
+SENS_4X = 0b101
+SENS_2X = 0b110
+SENS_1X = 0b111
+
 NAMES = [
     'Back', 'A', 'B', 'C', 'D', 'Enter'
 ]
@@ -30,6 +44,12 @@ NUMMAP = [
 
 _on_press = [None] * 6
 _on_release = [None] * 6
+
+def set_sensitivity(gain=GAIN_1X, sensitivity=SENS_2X):
+    dh._change_bit(0, 7, gain & 2) # Gain Control
+    dh._change_bit(0, 6, gain & 1)
+
+    dh._write_byte(cap1xxx.R_SENSITIVITY, sensitivity << 4)
 
 def on_touch(pad, handler=None):
     """Register a function to be called when a pad or pads are hit.
