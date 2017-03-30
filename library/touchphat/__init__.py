@@ -56,7 +56,7 @@ def on_release(pad, handler=None):
 
     The function should expect one argument: event. You can look at event.pad to determine which pad was released.
 
-    :param pad: A single integer from 0 to 5, a pad name (Back, A, B, C, D, Enter), or a list
+    :param pad: A single integer from 1 to 6, a pad name (Back, A, B, C, D, Enter), or a list
     :param handler: The handler function to call on release
     """
     global _on_release
@@ -122,7 +122,7 @@ def _handle_release(event):
 def led_on(pad):
     """Turn on an LED corresponding to a single pad.
 
-    :param pad: A single integer from 0 to 5 or a pad name (Back, A, B, C, D, Enter), corresponding to the pad whose LED you want to turn on.
+    :param pad: A single integer from 1 to 6 or a pad name (Back, A, B, C, D, Enter), corresponding to the pad whose LED you want to turn on.
 
     """
 
