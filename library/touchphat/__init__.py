@@ -36,7 +36,7 @@ def on_touch(pad, handler=None):
 
     The function should expect one argument: event. You can look at event.pad to determine which pad was hit.
 
-    :param pad: A single integer 0 to 5, a pad name (Back, A, B, C, D, Enter), or a list
+    :param pad: A single integer 1 to 6, a pad name (Back, A, B, C, D, Enter), or a list
     :param handler: The handler function to call on hit
     """
     global _on_press
@@ -143,7 +143,7 @@ def all_on():
 def led_off(pad):
     """Turn off an LED corresponding to a single pad.
 
-    :param pad: A single integer from 0 to 5 or a pad name (Back, A, B, C, D, Enter), corresponding to the pad whose LED you want to turn off.
+    :param pad: A single integer from 1 to 6 or a pad name (Back, A, B, C, D, Enter), corresponding to the pad whose LED you want to turn off.
 
     """
 
