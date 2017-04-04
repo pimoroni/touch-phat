@@ -87,7 +87,7 @@ def _pad_to_channel(pad):
             return NUMMAP.index(pad)
 
     except ValueError:
-        raise TypeError("Invalid touch pad {}".format(pad))
+        raise ValueError("Invalid touch pad {}. Should be one of \"{}\" or \"{}\"".format(pad, ', '.join(NAMES), ', '.join(str(x) for x in NUMMAP)))
 
 def _handle_press(event):
     global _on_press
