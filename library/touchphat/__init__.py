@@ -126,19 +126,19 @@ def led_on(pad):
 
     """
 
-    set_led(pad, True)
+    set_led(pad + 1, True)
 
 def all_off():
     """Turn off all LEDs"""
 
     for pad in PADS:
-        led_off(pad)
+        led_off(pad - 1)
 
 def all_on():
     """Turn on all LEDs"""
 
     for pad in PADS:
-        led_on(pad)
+        led_on(pad - 1)
 
 def led_off(pad):
     """Turn off an LED corresponding to a single pad.
@@ -147,7 +147,7 @@ def led_off(pad):
 
     """
 
-    set_led(pad, False)
+    set_led(pad + 1, False)
 
 def set_led(pad, value):
     idx = _pad_to_channel(pad)
