@@ -1,3 +1,8 @@
+0.0.2
+-----
+
+* BugFix: ValueError now returned on invalid pad number or name, instead of TypeError
+
 0.0.1
 -----
 
