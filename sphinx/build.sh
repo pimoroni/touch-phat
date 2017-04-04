@@ -1,10 +1,7 @@
 #!/bin/bash
 
-if [ ! -d "../sphinx.virtualenv" ]; then
-  sudo pip install virtualenv
-  python -m virtualenv ../sphinx.virtualenv
-fi
-source ../sphinx.virtualenv/bin/activate
-pip install -r requirements.txt
-make html
-deactivate
+echo "Per library build scripts have been deprecated."
+echo "Please clone github.com/pimoroni/tools"
+echo "and use the Sphinx build script there instead."
+echo ""
+echo "SRC_DIR=`pwd` ./build.sh"
