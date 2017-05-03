@@ -13,7 +13,7 @@ Architecture: all
 Section: python
 Depends: ${misc:Depends}, ${python:Depends}, python-cap1xxx
 Suggests: python-psutil, python-requests
-Description: python library designed to control Touch pHAT
+Description: Python library for the Pimoroni Touch pHAT
  Touch pHAT provides 6 touch pads and 6 undermounted LEDs.
  Ideal for adding physical controls to your Raspberry Pi.
  .
@@ -24,7 +24,7 @@ Architecture: all
 Section: python
 Depends: ${misc:Depends}, ${python3:Depends}, python3-cap1xxx
 Suggests: python3-psutil, python3-requests
-Description: python library designed to control Touch pHAT
+Description: Python library for the Pimoroni Touch pHAT
  Touch pHAT provides 6 touch pads and 6 undermounted LEDs.
  Ideal for adding physical controls to your Raspberry Pi.
  .
