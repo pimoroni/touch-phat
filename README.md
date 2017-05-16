@@ -71,12 +71,7 @@ In all cases you will have to enable the i2c bus.
 
 ## Documentation & Support
 
-* Guides and tutorials - https://learn.pimoroni.com/touch-phat-hd
+* Guides and tutorials - https://learn.pimoroni.com/touch-phat
 * Function reference - http://docs.pimoroni.com/touchphat/
 * GPIO Pinout - https://pinout.xyz/pinout/touch_phat
 * Get help - http://forums.pimoroni.com/c/support
-
-## Unofficial / Third-party libraries
-
-* Java library by Jim Darby - https://github.com/hackerjimbo/PiJava
-* Rust library by Tiziano Santoro - https://github.com/tiziano88/touch-phat-hd-rs
