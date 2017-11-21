@@ -5,31 +5,23 @@ from sys import exit
 try:
     import cap1xxx
 except ImportError:
-    exit("This library requires the cap1xxx module\nInstall with: sudo pip install cap1xxx")
+    raise ImportError("This library requires the cap1xxx module\nInstall with: sudo pip install cap1xxx")
 
 
 __version__ = '0.0.1'
 
-dh = cap1xxx.Cap1166(i2c_addr=0x2c)
 
+captouch = None
 auto_leds = True
 
 PADS = list(range(1,7))
-
-NAMES = [
-    'Back', 'A', 'B', 'C', 'D', 'Enter'
-]
-
-LEDMAP = [
-    5, 4, 3, 2, 1, 0
-]
-
-NUMMAP = [
-    1, 2, 3, 4, 5, 6
-]
+NAMES = ['Back', 'A', 'B', 'C', 'D', 'Enter']
+LEDMAP = [5, 4, 3, 2, 1, 0]
+NUMMAP = [1, 2, 3, 4, 5, 6]
 
 _on_press = [None] * 6
 _on_release = [None] * 6
+_is_setup = False
 
 def on_touch(pad, handler=None):
     """Register a function to be called when a pad or pads are hit.
@@ -41,6 +33,7 @@ def on_touch(pad, handler=None):
     """
     global _on_press
 
+    setup()
 
     if handler is None:
         def decorate(handler):
@@ -60,6 +53,8 @@ def on_release(pad, handler=None):
     :param handler: The handler function to call on release
     """
     global _on_release
+
+    setup()
 
     if handler is None:
         def decorate(handler):
@@ -96,7 +91,7 @@ def _handle_press(event):
     event.pad = NUMMAP[channel]
 
     if auto_leds:
-        dh.set_led_state(LEDMAP[channel], True)
+        captouch.set_led_state(LEDMAP[channel], True)
 
     if callable(_on_press[channel]):
         try:
@@ -111,7 +106,7 @@ def _handle_release(event):
     event.pad = NUMMAP[channel]
 
     if auto_leds:
-        dh.set_led_state(LEDMAP[channel], False)
+        captouch.set_led_state(LEDMAP[channel], False)
 
     if callable(_on_release[channel]):
         try:
@@ -150,13 +145,25 @@ def led_off(pad):
     set_led(pad, False)
 
 def set_led(pad, value):
+    setup()
     idx = _pad_to_channel(pad)
     led = LEDMAP[idx]
-    dh.set_led_state(led, value)
+    captouch.set_led_state(led, value)
 
-for x in range(6):
-    dh.on(x,event='press',   handler=_handle_press)
-    dh.on(x,event='release', handler=_handle_release)
+def setup():
+    global _is_setup, captouch
 
-#"""Unlink the LEDs since Touch pHAT's LEDs don't match up with the channels"""
-dh._write_byte(cap1xxx.R_LED_LINKING, 0b00000000)
+    if _is_setup:
+        return True
+
+    captouch = cap1xxx.Cap1166(i2c_addr=0x2c)
+
+    for x in range(6):
+        captouch.on(x,event='press',   handler=_handle_press)
+        captouch.on(x,event='release', handler=_handle_release)
+
+    #"""Unlink the LEDs since Touch pHAT's LEDs don't match up with the channels"""
+    captouch._write_byte(cap1xxx.R_LED_LINKING, 0b00000000)
+
+    _is_setup = True
+
