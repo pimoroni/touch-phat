@@ -30,6 +30,12 @@ If you choose to download examples you'll find them in `/home/pi/Pimoroni/touchp
 
 ### Manual install:
 
+You'll need to enable i2c:
+
+```
+sudo raspi-config nonint do_i2c 0
+```
+
 #### Library install for Python 3:
 
 on Raspbian:
