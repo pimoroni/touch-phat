@@ -17,7 +17,7 @@ Touch pHAT: App Launcher Example
 A: Terminal
 B: Browser
 C: Idle
-D: Dashboard 
+D: Dashboard
 
 Back: Logout
 Enter: Shutdown
