@@ -1,6 +1,8 @@
 0.0.2
 -----
 
+* Enhancement: Migrate to setup.cfg, linting and tidyup
+* Enhancement: Defer setup to avoid import side-effects
 * BugFix: ValueError now returned on invalid pad number or name, instead of TypeError
 
 0.0.1

@@ -1,6 +1,11 @@
 ![Touch pHAT](touchphat-logo.png)
 https://shop.pimoroni.com/products/touch-phat
 
+[![Build Status](https://shields.io/github/workflow/status/pimoroni/touch-phat/Python%20Tests.svg)](https://github.com/pimoroni/touch-phat/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/pimoroni/touch-phat/badge.svg?branch=master)](https://coveralls.io/github/pimoroni/touch-phat?branch=master)
+[![PyPi Package](https://img.shields.io/pypi/v/touchphat.svg)](https://pypi.python.org/pypi/touchphat)
+[![Python Versions](https://img.shields.io/pypi/pyversions/touchphat.svg)](https://pypi.python.org/pypi/touchphat)
+
 Touch pHAT is a simple add-on for your Pi or Pi Zero that includes 6 touch sensitive pads. Use it to add touch control to your projects.
 
 ## Installing
@@ -65,3 +70,17 @@ In all cases you will have to enable the i2c bus.
 * Function reference - http://docs.pimoroni.com/touchphat/
 * GPIO Pinout - https://pinout.xyz/pinout/touch_phat
 * Get help - http://forums.pimoroni.com/c/support
+
+# Changelog
+0.0.2
+-----
+
+* Enhancement: Migrate to setup.cfg, linting and tidyup
+* Enhancement: Defer setup to avoid import side-effects
+* BugFix: ValueError now returned on invalid pad number or name, instead of TypeError
+
+0.0.1
+-----
+
+* Initial release
+

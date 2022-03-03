@@ -16,3 +16,6 @@ __pycache__
 packaging/*tar.xz
 library/debian/
 sphinx.virtualenv/
+.coverage
+.pytest_cache
+.tox

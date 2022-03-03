@@ -1,20 +1,13 @@
-import time
-from sys import exit
+import cap1xxx
 
 
-try:
-    import cap1xxx
-except ImportError:
-    raise ImportError("This library requires the cap1xxx module\nInstall with: sudo pip install cap1xxx")
-
-
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 
 captouch = None
 auto_leds = True
 
-PADS = list(range(1,7))
+PADS = list(range(1, 7))
 NAMES = ['Back', 'A', 'B', 'C', 'D', 'Enter']
 LEDMAP = [5, 4, 3, 2, 1, 0]
 NUMMAP = [1, 2, 3, 4, 5, 6]
@@ -22,6 +15,7 @@ NUMMAP = [1, 2, 3, 4, 5, 6]
 _on_press = [None] * 6
 _on_release = [None] * 6
 _is_setup = False
+
 
 def on_touch(pad, handler=None):
     """Register a function to be called when a pad or pads are hit.
@@ -44,6 +38,7 @@ def on_touch(pad, handler=None):
 
     _bind_handler(_on_press, pad, handler)
 
+
 def on_release(pad, handler=None):
     """Register a function to be called when a pad or pads are released.
 
@@ -65,6 +60,7 @@ def on_release(pad, handler=None):
 
     _bind_handler(_on_release, pad, handler)
 
+
 def _bind_handler(target, pad, handler):
     if type(pad) == list:
         for p in pad:
@@ -73,6 +69,7 @@ def _bind_handler(target, pad, handler):
     else:
         channel = _pad_to_channel(pad)
         target[channel] = handler
+
 
 def _pad_to_channel(pad):
     try:
@@ -83,6 +80,7 @@ def _pad_to_channel(pad):
 
     except ValueError:
         raise ValueError("Invalid touch pad {}. Should be one of \"{}\" or \"{}\"".format(pad, ', '.join(NAMES), ', '.join(str(x) for x in NUMMAP)))
+
 
 def _handle_press(event):
     global _on_press
@@ -99,6 +97,7 @@ def _handle_press(event):
         except TypeError:
             _on_press[channel]()
 
+
 def _handle_release(event):
     global _on_release
     channel = event.channel
@@ -114,6 +113,7 @@ def _handle_release(event):
         except TypeError:
             _on_release[channel]()
 
+
 def led_on(pad):
     """Turn on an LED corresponding to a single pad.
 
@@ -123,17 +123,20 @@ def led_on(pad):
 
     set_led(pad, True)
 
+
 def all_off():
     """Turn off all LEDs"""
 
     for pad in PADS:
         led_off(pad)
 
+
 def all_on():
     """Turn on all LEDs"""
 
     for pad in PADS:
         led_on(pad)
+
 
 def led_off(pad):
     """Turn off an LED corresponding to a single pad.
@@ -144,11 +147,13 @@ def led_off(pad):
 
     set_led(pad, False)
 
+
 def set_led(pad, value):
     setup()
     idx = _pad_to_channel(pad)
     led = LEDMAP[idx]
     captouch.set_led_state(led, value)
+
 
 def setup():
     global _is_setup, captouch
@@ -159,11 +164,10 @@ def setup():
     captouch = cap1xxx.Cap1166(i2c_addr=0x2c)
 
     for x in range(6):
-        captouch.on(x,event='press',   handler=_handle_press)
-        captouch.on(x,event='release', handler=_handle_release)
+        captouch.on(x, event='press', handler=_handle_press)
+        captouch.on(x, event='release', handler=_handle_release)
 
-    #"""Unlink the LEDs since Touch pHAT's LEDs don't match up with the channels"""
+    # Unlink the LEDs since Touch pHAT's LEDs don't match up with the channels
     captouch._write_byte(cap1xxx.R_LED_LINKING, 0b00000000)
 
     _is_setup = True
-
